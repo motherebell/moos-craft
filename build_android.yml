@@ -1,0 +1,32 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Godot
+      uses: chickensoft-games/setup-godot@v1
+      with:
+        version: 4.2.1
+        include-android: true
+
+    - name: Export Android APK
+      run: |
+        mkdir -p build
+        godot --headless --export-release "Android" build/moos_craft.apk
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: moos_craft_apk
+        path: build/moos_craft.apk

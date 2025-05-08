@@ -1,0 +1,6 @@
+[application]
+config/name="moos.craft"
+config/icon="res://icon.svg"
+run/main_scene="res://scenes/main.tscn"
+[display]
+window/handheld/orientation="portrait"
